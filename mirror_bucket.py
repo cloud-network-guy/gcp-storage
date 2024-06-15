@@ -42,7 +42,7 @@ async def main(bucket_name: str, prefix: str, service_file: str, options: dict =
         await token.close()
         raise e
 
-    object_names = tuple([obj['name'] for obj in objects if int(obj.get('size', 0)) != 0])
+    object_names = tuple([obj['name'] for obj in objects if int(obj.get('size', 0)) != 0])  # ignore zero-byte objects
 
     if verbose := options.get('verbose', True):
         print(f"Downloading {len(object_names)} non-zero objects from bucket {bucket_name}/{prefix}...")
